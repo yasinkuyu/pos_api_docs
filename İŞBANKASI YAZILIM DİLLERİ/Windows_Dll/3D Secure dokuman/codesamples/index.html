@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>3-D SECURE - Örnek Kodlar</title>
+<style type="text/css">
+body {
+	font-family: Verdana, Arial, sans-serif;
+	padding-left: 30px;
+	padding-right: 20px;
+}
+
+h1 {
+	text-align: center;
+}
+
+div {
+	text-indent: 1cm;
+	font-size: 12px;
+	padding-bottom: 8px;
+	text-align: justify;
+}
+
+div.code {
+	font-family: Courier New, monospace;
+	padding-left: 2cm;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	background-color: #EDEDED;
+	text-indent: 0cm;
+	margin-bottom: 10px;
+	color: #666666;
+}
+
+div.code span {
+	color: black;
+	text-decoration: underline;
+	font-family: Verdana, Arial, sans-serif;
+}
+
+td,th {
+	text-align: center;
+	padding: 6px;
+}
+
+td.model {
+	text-align: left;
+	font-weight: bold;
+	padding-right: 10px;
+	border-right-color: #999999;
+	border-right-style: solid;
+	color: #999999;
+}
+
+th.model {
+	border-right-color: #999999;
+	border-right-style: solid;
+	color: black;
+}
+
+a {
+	color: black;
+}
+
+th {
+	border-bottom-color: #999999;
+	border-bottom-style: solid;
+	color: #999999;
+}
+</style>
+</head>
+<body>
+<h1>3-D SECURE ÖDEME İŞLEMLERİ</h1>
+<h2>ÖRNEK KODLAR</h2>
+<div>Bu bölümde üye işyerine ait sanal mağaza uygulamasına ödeme işlmelerini 3-D SECURE kullanarak yapabilmeleri için örnek oluşturabilecek kodlar bulunmaktadır.
+Üye işyeri sanal mağaza uygulamasının teknoloji, kullanım ve işleyişine göre değiştirilebilir. Bu uygulamalarda genellikle tercih edilen Java, PHP, ASP ve ASP.net
+teknolojilerine ait kod ve sayfa örneklerine aşağıdaki bağlantıları kullanarak ulaşabilirsiniz.</div>
+<div>Örnek 1'de bulunan köşeli parantez içinde olan parametrelerden bazıları (3DGATE_URL, CLIENT_ID) zaten biliniyor olacak, bazıları da hesaplanacaktır.
+3D ve 3D PAY Modellerin'nde kullanıcıdan kredi kartı bilgilerini alındığından ilgili alanlar bu form ile gönderililir.
+Diğer parametreler olarak gönderdiğiniz alanlar belirtilen sonuç sayfalarına aynen geri dönecektir.
+Java, ASP, PHP ve ASP.net dillerinde yazılmış çalışan örnek kodları inceleyiniz.</div>
+<div class="code"><span>Örnek 1: 3D ve 3D PAY Modellerinde kullanılan basit bir form örneği</span><br><br>
+&lt;form action="https://[3DGATE_URL]" method="post"&gt;<br>
+&nbsp;&nbsp;Kredi Kart Numarası: &lt;input type="text" name="pan" maxlength="20"&gt; &lt;br&gt;<br>
+&nbsp;&nbsp;Güvenlik Numarası: &lt;input type="text" name="cv2" maxlength="4"&gt; &lt;br&gt;<br>
+&nbsp;&nbsp;Geçerlilik Süresi (yy): &lt;input type="text" name="pan" maxlength="2"&gt; &lt;br&gt;<br>
+&nbsp;&nbsp;Geçerlilik Süresi (MM): &lt;input type="text" name="pan" maxlength="2"&gt; &lt;br&gt;<br>
+&nbsp;&nbsp;Kredi Kart Tipi: &lt;select name="cardType"&gt;&lt;option value="1"&gt;Visa&lt;/option&gt;&lt;option value="2"&gt;MasterCard&lt;/option&gt;&lt;/select&gt; &lt;br&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="clientid" value="[CLIENT_ID]" &gt; <br>
+&nbsp;&nbsp;&lt;input type="hidden" name="amount" value="[TUTAR]" &gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="oid" value="[SIPARIS_NO]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="okUrl" value="[SONUC_URL]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="failUrl" value="[SONUC_URL]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="rnd" value="[RASTGELE_DEGER]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="hash" value="[HASH]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="taksit" value="[TAKSIT]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="storetype" value="3d | 3d_pay"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="lang" value="tr"&gt;<br>
+&nbsp;&nbsp;&lt;input type="submit" name="submit" value="Gönder"&gt;<br>
+&nbsp;&nbsp;... DIGER PARAMETRELER<br>
+&lt;/form&gt;
+</div>
+<div>Örnek 2'de bulunan köşeli parantez içinde olan parametrelerden bazıları (3DGATE_URL, CLIENT_ID) zaten biliniyor olacak, bazıları da hesaplanacaktır.
+3D PAY HOSTING Modeli'nde kullanıcıdan kredi kartı bilgilerini almak gerekmediğinden ilgili alanlar bu form ile gönderilmez.
+Diğer parametreler olarak gönderdiğiniz alanlar belirtilen sonuç sayfalarına aynen geri dönecektir.
+Java, ASP, PHP ve ASP.net dillerinde yazılmış çalışan örnek kodları inceleyiniz.</div>
+<div class="code"><span>Örnek 2: 3D PAY HOSTING Modelinde kullanılan basit bir form örneği</span><br><br>
+&lt;form action="https://[3DGATE_URL]" method="post"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="clientid" value="[CLIENT_ID]" &gt; <br>
+&nbsp;&nbsp;&lt;input type="hidden" name="amount" value="[TUTAR]" &gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="oid" value="[SIPARIS_NO]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="okUrl" value="[SONUC_URL]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="failUrl" value="[SONUC_URL]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="rnd" value="[RASTGELE_DEGER]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="hash" value="[HASH]"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="storetype" value="3d_pay_hosting"&gt;<br>
+&nbsp;&nbsp;&lt;input type="hidden" name="lang" value="tr"&gt;<br>
+&nbsp;&nbsp;&lt;input type="submit" name="submit" value="Gönder"&gt;<br>
+&nbsp;&nbsp;... DIGER PARAMETRELER<br>
+&lt;/form&gt;
+</div>
+<h4>Örnek Kod Dosyaları</h4>
+<div>
+<table cellpadding="0" cellspacing="0">
+	<tr>
+		<th class="model">MODEL<br>&amp;<br>DİL</th>
+		<th>Java</th>
+		<th>ASP</th>
+		<th>PHP</th>
+		<th>ASP.net</th>
+	</tr>
+	<tr>
+		<td class="model">3D</td>
+		<td><a target="_blank" href="java/java_3dmodel.zip">Java - 3D</a></td>
+		<td><a target="_blank" href="asp/asp_3dmodel.zip">ASP - 3D</a></td>
+		<td><a target="_blank" href="php/php_3dmodel.zip">PHP - 3D</a></td>
+		<td><a target="_blank" href="asp.net/asp.net_3dmodel.zip">ASP.net - 3D</a></td>
+	</tr>
+	<tr>
+		<td class="model">3D PAY</td>
+		<td><a target="_blank" href="java/java_3dpay.zip">Java - 3D PAY</a></td>
+		<td><a target="_blank" href="asp/asp_3dpay.zip">ASP - 3D PAY</a></td>
+		<td><a target="_blank" href="php/php_3dpay.zip">PHP - 3D PAY</a></td>
+		<td><a target="_blank" href="asp.net/asp.net_3dpay.zip">ASP.net - 3D PAY</a></td>
+	</tr>
+	<tr>
+		<td class="model">3D PAY HOSTING</td>
+		<td><a target="_blank" href="java/java_3dpayhosting.zip">Java - 3D PAY HOSTING</a></td>
+		<td><a target="_blank" href="asp/asp_3dpayhosting.zip">ASP - 3D PAY HOSTING</a></td>
+		<td><a target="_blank" href="php/php_3dpayhosting.zip">PHP - 3D PAY HOSTING</a></td>
+		<td><a target="_blank" href="asp.net/asp.net_3dpayhosting.zip">ASP.net - 3D PAY HOSTING</a></td>
+	</tr>
+</table>
+<br><br><br><br>
+</div>
+</body>
+</html>

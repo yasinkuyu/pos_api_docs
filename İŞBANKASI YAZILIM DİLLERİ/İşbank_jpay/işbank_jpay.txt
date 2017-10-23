@@ -1,0 +1,232 @@
+
+                Ýþbank JPAY ver1.0
+
+Kurulum:
+
+JDK 1.3 ya da ustu kurulu olmalidir.
+
+jpay.jar dosyasini classpath'e kopyalayiniz.
+
+
+Kullanim:
+
+
+
+ Set fonksiyonlarini kullanarak islem yapabilmek icin gerekli alanlari set ediniz.
+
+ processTransaction fonksiyonunu cagirarak islemi gonderiniz.
+
+ Get fonksiyonlari ile sonucu aliniz.
+
+
+
+public int processTransaction(String host, int port, String path)
+
+host: "testsanalpos.est.com.tr"
+port: "443"
+path: "/servlet/cc5ApiServer"
+
+
+Set Fonksiyonlari:
+
+setName(String value)
+Name 		Uyeisyeri kullanici adi
+
+setPassword(String value)
+Password 	Uyeisyeri sifresi
+
+setClientId(String value)
+Clientid 	Uyeisyeri numarasi
+
+setMode(String value)
+Mode 	P olursa gercek islem T olursa test islemi yapar
+
+setType(String value)
+ChargeType	Auth PreAuth PostAuth Credit Void olabilir
+
+
+setNumber(String value)
+cardnumber	Kredi karti numarasi
+
+setExpires(String value)
+Kredi karti son kullanim tarihi mm/yy formatinda olmali
+
+setCvv2Val(String value)
+cv2 		CVVveya CVC2
+
+
+setTotal(String value)
+Total 	Islem tutari
+
+setCurrency(String value)
+currency 	Parabirimi (YTL icin 949)
+
+
+Gonderilmesi istege bagli alanlar
+
+setTaksit(String Value)
+
+Taksit 		Taksit sayisi.
+
+
+
+setOrderId(String value)
+Oid			Siparis numarasi unique olmalidir, bos gonderilirse sistem tarafindan uretilir.
+
+setGroupId(String value)
+groupid     Siparis grup  bos gonderilirse oid ile ayni olur.
+
+setTransId(String value)
+transid     Islem numarasi sistem tarafindan uretilir.
+
+setIPAddress(String value)
+ip          Siparis veren musterinin ip adresi
+
+setUserId(String value)
+userid      Siparis veren musterinin kullanici numarasi
+
+setBName(String value)
+Bname		Musteri fatura adi
+
+setBStreet1(String value)
+Baddr1  	Musteri fatura adres 1
+
+setBStreet2(String value)
+Baddr2		Musteri fatura adres 2
+
+setBStreet3(String value)
+Baddr3		Musteri fatura adres 3
+
+setBCity(String value)
+Bcity		Musteri fatura sehir
+
+setBPostalCode(String value)
+Bzip    	Musteri fatura posta kodu
+
+setBStateProv(String value)
+Bstate  	Musteri fatura eyalet
+
+setSName(String value)
+Sname   	Musteri teslimat adi
+
+setSStreet1(String value)
+Saddr1 	 	Musteri teslimat adres 1
+
+setSStreet2(String value)
+Saddr2 		Musteri teslimat adres 2
+
+setSStreet3(String value)
+Saddr3 		Musteri teslimat adres 3
+
+setSCity(String value)
+Scity   	Musteri teslimat sehir
+
+setSPostalCode(String value)
+Szip    	Musteri teslimat posta kodu
+
+setSStateProv(String value)
+Sstate  	Musteri teslimat eyalet
+
+setExtra(String value1,String Value2)
+extra parametreleri almak icin
+
+
+Alýnabilecek extra parametreler
+
+Dýþbank Sanal POS uygulamasýnda, ayrýca, mal veya hizmet satýþýna aracýlýk etmek sureti ile,
+tutarýn belli oranýnýn aracý firmaya aracý firma ÜÝY çalýþma koþullarý ile,
+geri kalan oranýn ise mal veya hizmet sahibi firmaya kendi ÜÝY çalýþma iþ koþullarý ile ödeneceði yapý mevcuttur.
+Kýsaca bu, bir iþlem 2 ayrý ÜÝY'ne farklý çalýþma koþullarýnda muhasebe yaratabilecek özelliktir.
+Arzu edildiði takdirde, uygulamanýn detaylarý hakkýnda bilgi verilebilir.
+
+
+a
+
+
+
+Get Fonksiyonlari
+
+getOrderId()
+oid         siparis numarasi
+
+getGroupId()
+groupid	    grup numarasi
+
+getResponse()
+Sonuc Approved,Declined ya da Error
+
+getAuthCode()
+code	    provizyon numarasi
+
+getHostRefNum()
+refno         referans numarasi
+
+getProcReturnCode()
+err	    Bankadan gelen islem kodu
+
+getTransId()
+transid	    islem numarasi
+
+getErrMsg()
+errmsg	    islem aciklama
+
+getExtra(String value1)
+extra parametreleri almak icin
+
+
+
+
+
+Test yapmak icin bilgileri  jpaytest.java dosyasinda bulabilirsiniz.
+
+Gercek islem gondermek icin asagidaki bilgileri degistirmelisiniz.
+
+testsanalpos.est.com.tr  yerine sanalpos.isbank.com.tr'ye islemi gondermeli clientid,name ve passwordunuzu degistirmelisiniz.
+
+
+
+
+
+Type (Ýþlem tipleri)
+
+Provizyon (PreAuth)
+Karttan provizyon alýnýr ve kart limiti iþlemi yapan üye iþyeri adýna bloke edilir. Kredi kartý sahibinin limiti provizyon alýnan tutar kadar azalýr. Provizyon iþlemi iþyeri tarafýndan onaylanmadýkça üye iþyeri hesabýna hesaplara yansýmaz, kredi kartý sahibinin ekstresinde görünmez 
+
+Ýþyeri Onayý (PostAuth)
+Provizon alýnmýþ iþlemi onaylamak ve para transferini gerçekleþtirmek için kullanýlýr.
+Ýþyeri onayý verilen iþlem otomatik olarak saat 00:00’de gerçekleþen günsonu iþleminden sonra  muhasebeleþerek iþyeri hesabýna ve kredi kartý hesabýna yansýr.  
+Provizyonlara onay verilmez ise kredi kartýna konan bloke tutar   maksimum 14 gün sonra kalkar.
+
+
+Satýþ (Auth)
+
+Provizyon  ve iþyeri onayý iþlemlerini ayný anda yapar. Satýþ iþlemi otomatik olarak saat 22:00’de gerçekleþen günsonu iþleminden sonra  muhasebeleþerek , üye iþyeri hesabýna ve kredi kartý hesabýna yansýr.  
+
+
+Provizyon Ýptali (Void)
+
+Onay almýþ Provizyon iþlemini iptal eder. Provizyon iptali iþlemi yalnýzca  gün içerisinde yapýlmýþ provizyonlar için yapýlabilir. Provizyon iptali yapýldýðýnda kredi kartý limitine konan bloke tutar serbest kalýr.Provizyon ve provizyon iptali iþlemleri kredi kartý ekstresinde görünmez.
+  Üzerinden gün geçmiþ bir provizyonu kaldýrmak için önce o provizyona onay vermeli ve ardýndan iade iþlemini yapmalýsýnýz. 
+
+Ýþyeri Onayý Ýptali (Void)
+
+Gün içerisinde yapýlan capture iþlemini iptal eder. Ýptal edilen capture iþlemleri hesaplara yansýmaz.
+
+
+Satýþ iptali (Void)
+
+Onay almýþ Satýþ iþlemini iptal eder. Ýptal edilen satýþ iþlemi kredi kart ekstresine yansýmaz. 
+
+
+Ýade (Credit)
+
+Ýade iþlemi iþyeri onayý yapýlmýþ sipariþlere ve satýþ iþlemlerine yapýlabilir.
+Taksitli satýþlar gün içerisinde iade edilemez ancak ertesigün iade edilebilir.
+Parapuan kullanýlarak yapýlan satýþlar online olarak iade edilemez bu iþlemleri iade etmek için þubenizle görüþmelisiniz.
+
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CC5Request>
+    <Name>user</Name>
+    <Password>***</Password>
+    <ClientId>700121212</ClientId>
+    <Mode>P</Mode>
+    <Type>Auth</Type>
+    <Number>4111111111111111</Number>
+    <Expires>10.2025</Expires>
+    <Cvv2Val>000</Cvv2Val>
+    <Total>10.01</Total>
+    <Currency>949</Currency>
+    <Extra>
+     <SUBMERCHANTNAME>9999999999</SUBMERCHANTNAME>
+    </Extra>
+</CC5Request>
+ 

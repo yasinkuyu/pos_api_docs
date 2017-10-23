@@ -1,0 +1,447 @@
+<html>
+<head>
+<title>Ornek Odeme sayfasi</title>
+<style TYPE="text/css">
+<!--
+.dgreen2 {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: bold; color:#086B2D; text-decoration: none}.red2 {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: bold; color:#FF0404; text-decoration: none}
+//-->
+</style></head>
+<body>
+<form method="POST" action="http://192.169.0.239/cgi-bin/payfinans">
+<table width = "600" border = "0"  cellpadding = "1" cellspacing = "1" bgcolor = "#009400">
+<tr bgcolor = "#FFFFFF">
+	<td width = "40%" align = "right">
+		<span class = "dgreen2">Session ID : &nbsp;&nbsp;</span>
+	</td>
+	<td width = "60%" align = "left">
+		<span class = "red2"> <input type=text name="sessionid"></span>
+	</td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+	<td width = "40%" align = "right">
+		<span class = "dgreen2">Alisveris Referans numarasi	(bos ise sistem verir): &nbsp;&nbsp;</span>
+	</td>
+	<td width = "60%" align = "left">
+		<span class = "red2"> <input type=text name="oid"></span>
+	</td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Alisveris Tutari	:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="total" value= ""></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">currency		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="currency" value= "949"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">mode			:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="mode" value= "Auth"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Kart Numarasi		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="cardno" value ="4242424242424242"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Son Kullanma Ayi	:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="expmonth" value= "06"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Son Kullanma Yili	:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="expyear" value= "09"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">CVV2 veya CVC2		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="cv2" value= "001"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">taksit miktari		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="taksit" value= ""></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Urun aciklamasi	        :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="aciklama" value= "Siparis hakkinda bilgi"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Firma			:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="firma"><br>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Email			:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="email"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Telefon 		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="phone"><br>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Userid 		    :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="userid"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"><b>Fatura adresi bilgileri</b>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Isim			:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Bname"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Adres Satiri 1 		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Baddr1"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Adres Satiri 2 		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Baddr2"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Sehir			:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Bcity"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Postakodu 		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Bzip"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Ulke Kodu		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Bcountry"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"><b>Teslimat adresi bilgileri</b></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Isim			:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Sname"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Adres Satiri 1 		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Saddr1"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Adres Satiri 2 		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Saddr2"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Sehir			:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Scity"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Postakodu 		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Szip"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">Ulke Kodu		:&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="Scountry"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra1fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex1fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra1fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex1fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra2fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex2fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra2fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex2fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra3fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex3fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra3fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex3fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra4fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex4fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra4fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex4fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra5fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex5fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra5fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex5fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra6fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex6fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra6fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex6fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra7fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex7fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra7fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex7fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra8fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex8fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra8fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex8fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra9fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex9fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra9fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex9fval"></span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">extra10fieldname         :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="ex10fname"></
+span>
+        </td>
+</tr> 
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2"> extra10fieldvalue       :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2"> <input type=text name="ex10fval"></span>
+        </td>
+</tr> 
+
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">PayerAuthenticationCode :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="PayerAuthenticationCode"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">CardholderPresentCode   :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="CardholderPresentCode"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">PayerSecurityLevel      :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="PayerSecurityLevel"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td width = "40%" align = "right">
+                <span class = "dgreen2">PayerTxnId              :&nbsp;&nbsp;</span>
+        </td>
+        <td width = "60%" align = "left">
+                <span class = "red2">  <input type=text name="PayerTxnId"></span>
+        </td>
+</tr>
+<tr bgcolor = "#FFFFFF">
+        <td " align = "center" collspan = "2">
+		<input type=submit>
+        </td>
+</tr>
+
+</table>
+</form>
+
+
+
+</body>
+</html>

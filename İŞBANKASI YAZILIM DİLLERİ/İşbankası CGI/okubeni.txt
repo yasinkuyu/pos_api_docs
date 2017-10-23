@@ -1,0 +1,286 @@
+                       PAYWORKS ODEME CGI versiyon 2.1
+                       -----------------------------
+
+CGI kendisine html POST metoduyla gonderilen bilgileri ve ini dosyasini
+okuyarak, odeme sistemine satis islemi gonderir.
+Alisveris sonucunu payment.ini'de belirtilen dosyaya yazar ve web server'a
+(WEBAPP parametresinde belirtilen yere) gonderir.
+web serverdaki alisveris sonuclarini karsilayan uygulamanin (WEBAPP) ciktisini
+CGI'in ciktisi olarak alisverisi yapan musteriye gonderir.
+
+Log'lar icin ayri bir dosya vardir. (ini LOGFILE parametresi)
+
+Hangi parametrelerin post edilecegi icin odeme.html dosyasina bakin.
+CGI programini calistirmak icin yapilmasi gerekenler
+
+1.) Payment.ini dosyasindaki gerekli degisikliklerin yapilmasi
+2.) cgi'in ve payment.ini'nin
+	web server'in cgi-bin dizinine yerlestirilmesi ve Internet'ten ulasilabilir
+	hale getirilmesi, cgi ile ini dosyasi ayni dizinde olmalilar.
+3.) sanal magazadan alisveris bilgilerinin bu cgi'a post ettirilmesi
+    (son alisveris ekraninda bir sayfa hazirlayip musterinin kredi karti
+    bilgilerini paycgi'ya gondermesinin saglanmasi, ornek bir odeme sayfasi
+	eklenmistir.(test.html))
+4.) Alisveris sonucunu isleyip magaza ile entegrasyonu yapacak web uygulamasinin
+    gelistirilmesi. Odeme cgi'i (paycgi) bu uygulamaya odeme sonucunu gonderecek,
+	uygulamanin ciktisini alisveris yapan uyeye dondurecektir.
+
+
+ONEMLI ONEMLI ONEMLI ONEMLI ONEMLI ONEMLI
+WEBAPP uygulamasina sonuclari gonderen paycgi'dir, dolayisi ile sizin kart sahibi
+browser'i ile set ettiginiz, session, cookie gibi degerler bu uygulamaya gelmez.
+WEBAPP uygulamasinin alisveris referans numarasindan(oid) ilgili bilgileri
+bulmasi ve oyle islem yapmasi gerekmektedir.
+ONEMLI ONEMLI ONEMLI ONEMLI ONEMLI ONEMLI
+
+----------------------------------------------------------
+ 			   KISA ISLEYIS ACIKLAMASI
+----------------------------------------------------------
+odeme sayfasindan odeme bilgileri (test.html dosyasindaki gibi) bu cgi'a
+http POST metoduyla gonderilir.
+CGI ini dosyasini kendi dizininde bulur ve bu dosyada tanimlanan
+islem ve satis modlarina gore (LIVE degeri ON olursa [production olur)
+SSLSERVER ile tanimlanan sunucuya odeme islemini gonderir ve sonucu alir.
+sonucu logfile ve respfile ile belirtilen dosyalara yazar.
+Alisverisi sonuclarini WEBAPP parametresinden gelen sayfaya gonderir
+buradan gelen sayfayi kart sahibine yazar.
+
+
+----------------------------------------------------------
+					INI dosyasi
+----------------------------------------------------------
+payment.ini isimli bir dosyaya kendi dizininde bakar. Eger sistem unix
+ise daha sonra /etc/payment.ini dosyasina bakar.
+Bu dosya tanimlamalari icermektedir.
+
+
+NAME:distest1
+PASSWORD:distest1
+CLIENTID:212345678
+
+
+kullanici adi , sifresi ve terminal numarasi guvenlik nedeniyle payment.ini de tanimlanir
+
+
+WEBAPP: Alisveris sonucunun post edilecegi uygulama
+    iki formatta yazilabilir (host=server adi,path=uygulama)
+    1) http://host:port/path
+    2) http://host/path
+
+	Eger http://makinam.com/deneme/isle.asp sizin sonucu isleyecek program ise
+    	WEBAPP: http://makinam.com/deneme/isle.asp
+	seklinde yazilmalidir.
+
+LIVE: islem modu ON veya OFF olabilir default OFF'tur.
+	ON olursa islemler gerceklesir.
+    OFF olursa islemler test islemi kabul edilir.
+LOGFILE: Bu programin bilgi loglarini yazacagi dosya ismi.
+RESPFILE: Sonuclarin yazilacagi dosya ismi
+SSLSERVER: Odemenin gonderilecegi host adi(bankaya sorun)
+HTTP: 1.0 veya 1.1 olabilir, sonucu
+	WEBAPP adresine gonderirken kullanilacak
+	olan HTTP protokolu. Default degeri 1.0
+
+Eger loglarin veya sonuclarin yazilacagi dosya istenmiyorsa bu alanlara
+	(unix platformu icin) /dev/null
+girilmelidir.
+
+
+EXTRA1:KALANPUAN
+EXTRA2:KULLANILANPUAN
+EXTRA3:KULLANILANLIMIT
+.....
+.......
+EXTRA10:....
+
+
+burada alisveris sonucunda geri donen ve alinmasi istenen extralar 10 taneye kadar yazilabilir)
+
+
+----------------------------------------------------------
+	CGI'a gonderilebilecek degiskenler listesi
+----------------------------------------------------------
+
+-------cgi icin zorunlu olan alanlar-------
+
+Musteriye gozukenler :
+
+ Alisveris Tutari	: <input type=text name="total">
+ Kart Numarasi 		: <input type=text name="cardno">
+ Son Kullanma Ayi	: <input type=text name="expmonth">
+ Son Kullanma Yili	: <input type=text name="expyear">
+  	yilin son iki hanesi eger yil 2003 ise 03 girilecek
+ mode                :  <input type=text name="mode">
+	sale,auth , preauth veya postauth olabilir. Auth ve sale  
+ikisi de satis demektir.Sistem,  mode alani bos birakilir veya buraya yazilan degeri 
+anlamazsa   ekrana hata mesaji yazilir.mode alanina yazilan deger icin buyuk kucuk harf farketmez.
+
+Musteriye gozukmeyen zorunlu alanlar  :
+
+ currency  : <input type=text name="currency">
+ (currency icin 792 degeri TL gosterir)
+ Verified by Visa alanlari(3-D secure):
+
+ PayerAuthenticationCode : <input type=text name="PayerAuthenticationCode"><br>
+ CardholderPresentCode   : <input type=text name="CardholderPresentCode"><br>
+ PayerSecurityLevel      : <input type=text name="PayerSecurityLevel"><br>
+ PayerTxnId              : <input type=text name="PayerTxnId"><br>
+
+-------cgi icin zorunlu olmayan ama gerekli olan alanlar----------
+
+sessionid : <input type=text name="sessionid">  
+  bu alana girilen session id sonucu isleyecek programa gonderilir ve geri dondurulurse 
+  odeme sayfasinda kontrol edilebilir.
+
+Alisveris Referans numarasi	(bos ise sistem verir):<input type=text name="oid">
+CVV2 veya CVC2      : <input type=text name="cv2">
+	kartin arkasinda yazan uc haneli guvenlik numarasi
+taksit miktari      : <input type=text name="taksit">
+	
+
+	
+	
+extra1fieldname   :           <input type=text name="ex1fname">
+extra1fieldvalue  :           <input type=text name="ex1fval">
+extra2fieldname   :           <input type=text name="ex2fname">
+extra2fieldvalue  :           <input type=text name="ex2fval">
+extra3fieldname   :           <input type=text name="ex3fname">
+extra3fieldvalue  :           <input type=text name="ex3fval">
+extra4fieldname   :           <input type=text name="ex4fname">
+extra4fieldvalue  :           <input type=text name="ex4fval">
+extra5fieldname   :           <input type=text name="ex5fname">
+extra5fieldvalue  :           <input type=text name="ex5fval">           
+extra6fieldname   :           <input type=text name="ex6fname">
+extra6fieldvalue  :           <input type=text name="ex6fval">
+extra7fieldname   :           <input type=text name="ex7fname">
+extra7fieldvalue  :           <input type=text name="ex7fval">
+extra8fieldname   :           <input type=text name="ex8fname">
+extra8fieldvalue  :           <input type=text name="ex8fval">
+extra9fieldname   :           <input type=text name="ex9fname">
+extra9fieldvalue  :           <input type=text name="ex9fval">
+extra10fieldname  :           <input type=text name="ex10fname">:           
+extra10fieldvalue :           <input type=text name="ex10fval">
+
+
+
+gonderilmesi istenen extra alanlari gerekli name & value cifti girilmelidir
+( mesela    extra1fieldname  :  extra_alan_adi   extra1fieldvalue  :  extra_deger  )
+ornek alan adlari :
+EXTRAPUANORAN
+EXTRAPUANTUTAR
+KOMISYONTERMINAL
+KOMISYONTUTAR
+KULLANPUAN
+CARDHOLDERPRESENTCODE)
+
+
+
+----alisveris kontrolu acisindan  gonderilmesi zorunlu olan alanlar--
+=============Fatura bilgileri=================
+Isim				: <input type=text name="Bname">
+Adres Satiri 1 		: <input type=text name="Baddr1">
+Adres Satiri 2 		: <input type=text name="Baddr2">
+Sehir				: <input type=text name="Bcity">
+Postakodu 			: <input type=text name="Bzip">
+Ulke Kodu			: <input type=text name="Bcountry">
+
+============Teslimat bilgileri================
+Isim				: <input type=text name="Sname">
+Adres Satiri 1 		: <input type=text name="Saddr1">
+Adres Satiri 2 		: <input type=text name="Saddr2">
+Sehir				: <input type=text name="Scity">
+Postakodu 			: <input type=text name="Szip">
+Ulke Kodu			: <input type=text name="Scountry">
+
+================Diger=========================
+Siparis aciklamasi  : <input type=text name="aciklama">
+Firma bilgisi		: <input type=text name="firma">
+Email				: <input type=text name="email">
+Urun Aciklamasi		: <input type=text name="prodinfo">
+userid				: <input type=text name="userid">
+Telefon 			: <input type=text name="phone">
+
+
+----------------------------------------------------------
+			ornek ini dosyasi
+----------------------------------------------------------
+
+NAME:distest1
+PASSWORD:distest1
+CLIENTID:212345678
+
+
+WEBAPP: http://ali.com.tr/mydir/sonuclar.asp
+LIVE: ON
+Logfile: /logs/payment.log
+Respfile: /logs/sonuclar.log
+SSLSERVER: testvpos.est.com.tr
+
+EXTRA1:KALANPUAN
+EXTRA2:KULLANILANPUAN
+EXTRA3:KULLANILANLIMIT
+.
+.
+EXTRA10:....
+
+
+burada alisveris sonucunda geri donen ve alinmasi istenen extralar 10 taneye kadar yazilabilir)
+
+----------------------------------------------------------
+				html POST
+----------------------------------------------------------
+Islem sonuclari WEBAPP adresine gonderilirken
+kullanilan degiskenler. Eger degiskenlde bosluk varsa yerine '-' yazilir.
+
+Islem basarili ise
+ sonuc=0
+ onaykodu=islemin bankadan aldigi onay kodu
+ rrn=banka takip numarasi
+ oid=alisveris referans numarasi
+
+Islem/kart gecersiz ise
+ sonuc=1
+ hatakodu=aciklama
+ oid=alisveris referans numarasi
+
+
+takip eden degiskenler ise her durumda gonderilir
+ groupid  (group id)
+ transid  (transaction id)
+ appr     (Approved / Decline)
+ retcode  onay kodu
+ rrn      basarisiz durumdada bos gonderilir
+ err      error code ,  basarili durumda 00 gelir
+ errmsg   basarisiz durumda hata nedeni , basarili durumda bos
+ 
+sessionid  odeme sayfasinda girilen sessionid degeri
+
+ayrica   payment.inide gonderildigi tanimlanan EXTRA degiskenleri 
+gonderilmesi durumunda bu alanlara karsilik donen degerler de post edilir 
+
+(ornekte 
+
+EXTRA1:KALANPUAN
+EXTRA2:KULLANILANPUAN
+EXTRA3:KULLANILANLIMIT
+
+
+vardi)
+
+
+)
+
+
+
+----------------------------------------------------------
+       Respfile: Sonuclarin yazilacagi dosya formati
+----------------------------------------------------------
+1-14   	:   islem tarihi
+15      :   > isareti
+16      :   space(bosluk)
+17      :   islem sonucu 0 basarili, 1 gecersiz
+18      :   ,
+bundan sonra aralari "," ile ayrilmis olarak
+	onay kodu veya islem gecersiz ise hata kodu
+    siparis numarasi (oid)
+    referans numarasi(gecersiz islemler icin "YOK")

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<title>3-D SECURE</title>
+<style type="text/css">
+body {
+	font-family: Verdana, Arial, sans-serif;
+	padding-left: 30px;
+	padding-right: 20px;
+}
+h1 {
+	text-align: center;
+}
+h3 {
+	text-indent: 1cm;
+}
+div {
+	text-indent: 1cm;
+	font-size: 12px;
+	padding-bottom: 8px;
+	text-align: justify;
+}
+a {
+	color: black;
+}
+div.code {
+	font-family: Courier New, monospace;
+	padding-left: 2cm;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	background-color: #EDEDED;
+	text-indent: 0cm;
+	color: #666666;
+}
+p.code span {
+	color: black;
+	text-decoration:underline;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+</style>
+</head>
+<body>
+<h1>3-D SECURE ÖDEME İŞLEMLERİ</h1>
+<div>
+Bu döküman, üye işyerlerinin 3-D SECURE hakkında daha fazla bilgi edinebilmeleri ve 3-D SECURE kullanarak ödeme işlemlerini gerçekleştirebilmeleri için hazırlanmıştır.
+</div>
+<h2>3-D SECURE Nedir?</h2>
+<div>3-D Secure, VISA ve MasterCard tarafından geliştirilen güvenlik sistemi, internet ödeme işlemlerinde sahtecilik ve işlem itirazlarını minimuma indirmeyi hedefleyen bir güvenlik çözümüdür.
+3D Secure/SecureCode ile alışverişin geçerli sayılabilmesi için, kart sahibinin yaptığı alışverişi, kendine özel şifresi ile onaylaması gerekmektedir. Kart sahibinin kimliği, özel şifre ile kontrol edilmektedir. </div>
+<h2>Yararları Nelerdir?</h2>
+<div>
+Kart sahipleri için yararlarını
+<ul>
+<li>Internet üzerinden yapılan alışverişlerde kart sahibi güveninin artması,</li>
+<li>Kullanım için ekstra bir yazılıma ihtiyaç duyulmaması,</li>
+<li>Kullanımının kolay olması,</li>
+<li>Online alışverişlerde kart üzerinde kontrol sağlaması,</li>
+</ul>
+</div>
+<div>
+Üye İşyerleri için yararlarını ise
+<ul>
+<li>Mağaza tarafından kullanılan yazılıma kolayca entegre edilmesi,</li>
+<li>Artan müşteri güveni ile birlikte online satışlarda artış sağlaması ( Yapılan araştırmalarda kart sahibi doğrulama kullanılan mağazalarda alışveriş sayısının %100-200 arasında artış sağlandığı gözlenmiştir.) ,</li>
+<li>Sahtekarlık riskini büyük oranda azaltması,</li>
+<li>Müşteri ile mağaza arasındaki etkileşimi minimuma indirmesi,</li>
+<li>Geri ödemelerde sorumluluğu mağazalardan bankalara geçirmesi</li>
+</ul>
+</div>
+<div>şeklinde sıralayabiliriz.</div>
+<div><a target="_blank" href="3DSecure.pdf">Daha fazla bilgi edinmek için lütfen tıklayınız.</a></div>
+<h2>Nasıl Çalışır?</h2>
+<div>
+3-D Secure ödeme entegrasyonu üye işyeri sanal mağazaları için kısa sürebilecek ve son derece kolay bir işlemdir.
+Sanal mağaza, yeni bir yazılım ihtiyacı duymaz, var olan sayfalarda yapılacak bir kaç değişiklik 3-D Secure uyumu için yeterli olabilecektir. 
+</div>
+<div>
+Bu işlem, sanal mağazanın gereksinimleri, altyapısı, tercihleri göz önüne alınarak 3 ayrı model üzerinden çalışabilir. Bunlar:
+</div>
+<h3>Model 1 - 3D :</h3>
+<div>
+Kredi kartının 3D Secure doğrulamasının yapıldığı, ödeme işleminin sanal mağaza uygulamasının kendisinin tamamladığı modeldir.
+Bu modelde, üye işyerine ait sanal mağaza uygulaması kredi kartı bilgilerini alır ve kredi kartının doğrulama işleminden gelen cevaba göre ödemeyi kendi API ve XML formatlarını kullanarak tamamlar.
+3D Modeli'ne ait daha fazla bilgi edinmek ve örnek akış şemasını incelemek için lütfen <a href="presentations/Model 1 - 3D.pdf" target="_blank">buraya tıkyaınız.</a>
+</div>
+<h3>Model 2 - 3D PAY :</h3>
+<div>
+Kredi kartının 3D Secure doğrulamasının ve üye işyeri anlaşmalı bankasına ödemenin yapıldığı, doğrulama ve ödeme sonuç bilgilerinin sanal mağaza uygulamasına iletildiği modeldir.
+Bu modelde, üye işyerine ait sanal mağaza uygulaması kredi kartı bilgilerini alır ve kredi kartının doğrulama işleminden gelen cevaba göre ödemeyi 3DGATE tamamlar.
+3D PAY Modeli'ne ait daha fazla bilgi edinmek ve örnek akış şemasını incelemek için lütfen <a href="presentations/Model 2 - 3D PAY.pdf" target="_blank">buraya tıkyaınız.</a>
+</div>
+<h3>Model 3 - 3D PAY HOSTING :</h3>
+<div>
+Kredi kartının 3D Secure doğrulamasının ve üye işyeri anlaşmalı bankasına ödemenin yapıldığı, doğrulama ve ödeme sonuç bilgilerinin sanal mağaza uygulamasına iletildiği modeldir.
+Bu modelde, üye işyerine ait sanal mağaza uygulaması sadece alışveriş bilgilerini gönderir.
+Kredi kartının doğrulanması 3DGATE tarafından anlaşmalı bankaya göre açılan yeni bir güvenli pencere aracılığıyla yapılır.
+Doğrulama işleminden gelen cevaba göre ödemeyi yine 3DGATE tamamlar.
+3D PAY HOSTING Modeli'ne ait daha fazla bilgi edinmek ve örnek akış şemasını incelemek için lütfen <a href="presentations/Model 3 - 3D PAY HOSTING.pdf" target="_blank">buraya tıkyaınız.</a>
+</div>
+<br>
+<div>
+<a href="codesamples/index.html"><b style="font-size: 14px;">Modellere ait örnekler hakkında bilgi edinmek ve kodları incelemek için lütfen tıklayınız.</b></a>
+<br><br><br><br>
+</div>
+</body>
+</html>
